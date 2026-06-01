@@ -1,0 +1,65 @@
+schema: spec-driven
+
+context: |
+  專案名稱：pdf-parser-system
+
+  目的：
+  - 解析 PDF 檔案，並預覽擷取後的內容。
+
+  專案結構：
+  - frontend/: React + Vite frontend
+  - backend/: NestJS API server
+  - ai/: AI-facing rules、skills、specs 和專案筆記
+
+  共通規範：
+  - 永遠使用正體中文撰寫文件與回覆使用者，專有名詞與技術名詞維持英文。
+  - 全專案都使用 TypeScript。
+  - 所有建議與實作方向，應以專業化、業界常用、可維護的方式為依據。
+  - AI agent 永遠不主動執行 git 操作；需要 git 相關操作時，必須先由使用者明確要求。
+  - 新增 pattern 前，優先沿用既有專案結構與慣例。
+  - 變更範圍應聚焦在目前要求的 feature 或 fix。
+  - 沒有明確理由時，不要重寫無關檔案或大範圍重新格式化。
+  - 當行為有變更時，新增或更新聚焦的 tests。
+  - 完成工作前，執行最相關的 build、lint 或 test 指令。
+
+  Frontend 規範：
+  - Frontend 使用 React、Vite、TypeScript。
+  - UI library 使用 MUI (Material UI)。
+  - 開發 UI 元件時，優先使用 MUI 既有 components。
+  - 只有在 MUI 無法滿足需求時，才自行撰寫新的 component。
+  - 自行撰寫 component 時，也必須遵循 MUI 的 style、theme 與互動慣例。
+
+  Backend 規範：
+  - Backend 使用 NestJS、TypeScript。
+  - Backend API 都需要提供 property 說明。
+  - Backend API 都需要提供 controller 說明。
+  - 使用 NestJS module、provider、controller 和 service patterns，避免 ad hoc structure。
+
+  相關 AI 文件：
+  - ai/codex.md
+  - ai/rules/shared.md
+  - ai/rules/frontend.md
+  - ai/rules/backend.md
+
+rules:
+  proposal:
+    - 使用正體中文撰寫 proposal，專有名詞與技術名詞維持英文。
+    - 清楚標示影響範圍是 shared、frontend、backend，或跨多端。
+    - 若需求會影響 API contract，必須在 Impact 中明確列出。
+  specs:
+    - 使用正體中文撰寫 specs，專有名詞與技術名詞維持英文。
+    - 跨 frontend/backend 的行為與 API contract 應放在 shared capability。
+    - Frontend-only 行為應獨立成 frontend capability。
+    - Backend-only 行為應獨立成 backend capability。
+    - 每個 requirement 都必須有至少一個可驗證 scenario。
+  design:
+    - 使用正體中文撰寫 design，專有名詞與技術名詞維持英文。
+    - 技術決策需以專業化、業界常用、可維護的方式為依據。
+    - 若新增 dependencies，必須說明理由、替代方案與維護風險。
+    - Frontend design 必須優先考量 MUI components 與 MUI theme。
+    - Backend design 必須維持 NestJS module、controller、service、provider 分層。
+  tasks:
+    - 使用正體中文撰寫 tasks，專有名詞與技術名詞維持英文。
+    - Tasks 必須依照 frontend、backend、shared 或 validation 分組。
+    - 每個 task 都應可驗證，且範圍小到能在單次工作階段完成。
+    - 不得加入任何主動 git 操作 task。
