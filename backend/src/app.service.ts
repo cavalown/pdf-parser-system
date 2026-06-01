@@ -4,8 +4,10 @@ import { Injectable } from '@nestjs/common';
 export class AppService {
   getHealth() {
     return {
+      alive: true,
       status: 'ok',
       service: 'pdf-parser-system-api',
+      checkedAt: new Date().toISOString(),
     };
   }
 }
