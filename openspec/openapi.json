@@ -1,0 +1,503 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "PDF Parser API",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/api/health": {
+      "get": {
+        "summary": "Health Check",
+        "operationId": "health_check_api_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/pdf/parse": {
+      "post": {
+        "summary": "Parse Pdf Endpoint",
+        "operationId": "parse_pdf_endpoint_api_pdf_parse_post",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_parse_pdf_endpoint_api_pdf_parse_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ParseResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/pdf/analyze": {
+      "post": {
+        "summary": "Analyze PDF layout",
+        "description": "Upload a computer-generated PDF and receive a Tailwind layout specification JSON, including canvas dimensions, per-page typography tokens, layout blocks (header, footer, text, two-column, table), and embedded table schemas.",
+        "operationId": "analyze_pdf_endpoint_api_pdf_analyze_post",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_analyze_pdf_endpoint_api_pdf_analyze_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LayoutSpec"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "BBox": {
+        "properties": {
+          "x0": {
+            "type": "number",
+            "title": "X0",
+            "description": "Left x coordinate in points"
+          },
+          "top": {
+            "type": "number",
+            "title": "Top",
+            "description": "Top y coordinate in points (0 = page top)"
+          },
+          "x1": {
+            "type": "number",
+            "title": "X1",
+            "description": "Right x coordinate in points"
+          },
+          "bottom": {
+            "type": "number",
+            "title": "Bottom",
+            "description": "Bottom y coordinate in points"
+          }
+        },
+        "type": "object",
+        "required": [
+          "x0",
+          "top",
+          "x1",
+          "bottom"
+        ],
+        "title": "BBox"
+      },
+      "Body_analyze_pdf_endpoint_api_pdf_analyze_post": {
+        "properties": {
+          "file": {
+            "type": "string",
+            "format": "binary",
+            "title": "File"
+          }
+        },
+        "type": "object",
+        "required": [
+          "file"
+        ],
+        "title": "Body_analyze_pdf_endpoint_api_pdf_analyze_post"
+      },
+      "Body_parse_pdf_endpoint_api_pdf_parse_post": {
+        "properties": {
+          "file": {
+            "type": "string",
+            "format": "binary",
+            "title": "File"
+          }
+        },
+        "type": "object",
+        "required": [
+          "file"
+        ],
+        "title": "Body_parse_pdf_endpoint_api_pdf_parse_post"
+      },
+      "Canvas": {
+        "properties": {
+          "size": {
+            "type": "string",
+            "enum": [
+              "A4",
+              "Letter",
+              "Custom"
+            ],
+            "title": "Size",
+            "description": "Page size classification"
+          },
+          "width_pt": {
+            "type": "number",
+            "title": "Width Pt",
+            "description": "Page width in points"
+          },
+          "height_pt": {
+            "type": "number",
+            "title": "Height Pt",
+            "description": "Page height in points"
+          },
+          "tailwind_page_class": {
+            "type": "string",
+            "title": "Tailwind Page Class",
+            "description": "Tailwind classes for the page shell, e.g. w-[210mm] h-[297mm] p-[20mm] bg-white"
+          }
+        },
+        "type": "object",
+        "required": [
+          "size",
+          "width_pt",
+          "height_pt",
+          "tailwind_page_class"
+        ],
+        "title": "Canvas"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "HealthResponse": {
+        "properties": {
+          "alive": {
+            "type": "boolean",
+            "title": "Alive"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "service": {
+            "type": "string",
+            "title": "Service"
+          },
+          "checkedAt": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Checkedat"
+          }
+        },
+        "type": "object",
+        "required": [
+          "alive",
+          "status",
+          "service",
+          "checkedAt"
+        ],
+        "title": "HealthResponse"
+      },
+      "LayoutBlock": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id",
+            "description": "Block identifier, e.g. p1_block_0"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "header",
+              "footer",
+              "text",
+              "two_column",
+              "table"
+            ],
+            "title": "Type",
+            "description": "Visual block type"
+          },
+          "bbox": {
+            "$ref": "#/components/schemas/BBox",
+            "description": "Bounding box in PDF points"
+          },
+          "tailwind_layout": {
+            "type": "string",
+            "title": "Tailwind Layout",
+            "description": "Tailwind layout classes for this block"
+          },
+          "schema": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TableSchema"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Table schema, present only when type is table"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "type",
+          "bbox",
+          "tailwind_layout"
+        ],
+        "title": "LayoutBlock"
+      },
+      "LayoutSpec": {
+        "properties": {
+          "canvas": {
+            "$ref": "#/components/schemas/Canvas"
+          },
+          "pages": {
+            "items": {
+              "$ref": "#/components/schemas/PageAnalysis"
+            },
+            "type": "array",
+            "title": "Pages"
+          }
+        },
+        "type": "object",
+        "required": [
+          "canvas",
+          "pages"
+        ],
+        "title": "LayoutSpec"
+      },
+      "PageAnalysis": {
+        "properties": {
+          "page": {
+            "type": "integer",
+            "title": "Page",
+            "description": "Page number, 1-indexed"
+          },
+          "typography_tokens": {
+            "$ref": "#/components/schemas/TypographyTokens"
+          },
+          "blocks": {
+            "items": {
+              "$ref": "#/components/schemas/LayoutBlock"
+            },
+            "type": "array",
+            "title": "Blocks",
+            "description": "Layout blocks ordered top-to-bottom"
+          }
+        },
+        "type": "object",
+        "required": [
+          "page",
+          "typography_tokens",
+          "blocks"
+        ],
+        "title": "PageAnalysis"
+      },
+      "PageResult": {
+        "properties": {
+          "page": {
+            "type": "integer",
+            "title": "Page"
+          },
+          "text": {
+            "type": "string",
+            "title": "Text"
+          }
+        },
+        "type": "object",
+        "required": [
+          "page",
+          "text"
+        ],
+        "title": "PageResult"
+      },
+      "ParseResponse": {
+        "properties": {
+          "filename": {
+            "type": "string",
+            "title": "Filename"
+          },
+          "total_pages": {
+            "type": "integer",
+            "title": "Total Pages"
+          },
+          "pages": {
+            "items": {
+              "$ref": "#/components/schemas/PageResult"
+            },
+            "type": "array",
+            "title": "Pages"
+          }
+        },
+        "type": "object",
+        "required": [
+          "filename",
+          "total_pages",
+          "pages"
+        ],
+        "title": "ParseResponse"
+      },
+      "TableSchema": {
+        "properties": {
+          "columns": {
+            "type": "integer",
+            "title": "Columns",
+            "description": "Number of columns"
+          },
+          "tailwind_grid_cols": {
+            "type": "string",
+            "title": "Tailwind Grid Cols",
+            "description": "Tailwind grid-cols class, e.g. grid-cols-[3fr_1fr_1fr]"
+          },
+          "column_widths_pt": {
+            "items": {
+              "type": "number"
+            },
+            "type": "array",
+            "title": "Column Widths Pt",
+            "description": "Width of each column in points"
+          },
+          "alignments": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Alignments",
+            "description": "Tailwind text alignment per column, e.g. text-left"
+          },
+          "has_border": {
+            "type": "boolean",
+            "title": "Has Border",
+            "description": "Whether the table has horizontal border lines"
+          },
+          "cell_padding": {
+            "type": "string",
+            "title": "Cell Padding",
+            "description": "Tailwind padding class for cells, e.g. py-[8px] px-[6px]"
+          }
+        },
+        "type": "object",
+        "required": [
+          "columns",
+          "tailwind_grid_cols",
+          "column_widths_pt",
+          "alignments",
+          "has_border",
+          "cell_padding"
+        ],
+        "title": "TableSchema"
+      },
+      "TypographyTokens": {
+        "properties": {
+          "h1": {
+            "type": "string",
+            "title": "H1",
+            "description": "Tailwind classes for the largest heading, e.g. text-[24pt] font-bold text-slate-900"
+          },
+          "label": {
+            "type": "string",
+            "title": "Label",
+            "description": "Tailwind classes for labels/subheadings"
+          },
+          "body": {
+            "type": "string",
+            "title": "Body",
+            "description": "Tailwind classes for body text (most frequent font size)"
+          }
+        },
+        "type": "object",
+        "required": [
+          "h1",
+          "label",
+          "body"
+        ],
+        "title": "TypographyTokens"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "ctx": {
+            "type": "object",
+            "title": "Context"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    }
+  }
+}

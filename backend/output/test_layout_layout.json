@@ -1,0 +1,56 @@
+{
+  "canvas": {
+    "size": "A4",
+    "width_pt": 595.28,
+    "height_pt": 841.89,
+    "tailwind_page_class": "w-[210mm] h-[297mm] pt-[83mm] pr-[166mm] pb-[211mm] pl-[42mm] bg-white"
+  },
+  "pages": [
+    {
+      "page": 1,
+      "typography_tokens": {
+        "h1": "text-[24.0pt] font-bold text-slate-900",
+        "label": "text-[11.0pt] font-normal text-slate-700",
+        "body": "text-[10.0pt] font-normal text-slate-600"
+      },
+      "blocks": [
+        {
+          "id": "p1_block_0",
+          "type": "header",
+          "bbox": {
+            "x0": 72.0,
+            "top": 42.85799999999995,
+            "x1": 242.736,
+            "bottom": 89.16700000000003
+          },
+          "tailwind_layout": "grid grid-cols-[1fr_2fr] gap-[8px]",
+          "schema": null
+        },
+        {
+          "id": "p1_block_1",
+          "type": "two_column",
+          "bbox": {
+            "x0": 72.0,
+            "top": 233.96000000000004,
+            "x1": 434.46,
+            "bottom": 288.96000000000004
+          },
+          "tailwind_layout": "grid grid-cols-[1fr_1fr] gap-[132px]",
+          "schema": null
+        },
+        {
+          "id": "p1_block_2",
+          "type": "footer",
+          "bbox": {
+            "x0": 72.0,
+            "top": 805.5459999999999,
+            "x1": 112.92000000000002,
+            "bottom": 813.5459999999999
+          },
+          "tailwind_layout": "flex flex-col space-y-[8px]",
+          "schema": null
+        }
+      ]
+    }
+  ]
+}

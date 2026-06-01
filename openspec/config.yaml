@@ -8,12 +8,14 @@ context: |
 
   專案結構：
   - frontend/: React + Vite frontend
-  - backend/: NestJS API server
+  - backend/: FastAPI (Python) API server
+  - openspec/: Spec-driven 開發文件，含 specs/、changes/、config.yaml
+  - openspec/openapi.json: FastAPI 自動產生的 OpenAPI spec（由 export_openapi.py 匯出）
   - ai/: AI-facing rules、skills、specs 和專案筆記
 
   共通規範：
   - 永遠使用正體中文撰寫文件與回覆使用者，專有名詞與技術名詞維持英文。
-  - 全專案都使用 TypeScript。
+  - Frontend 使用 TypeScript；Backend 使用 Python。
   - 所有建議與實作方向，應以專業化、業界常用、可維護的方式為依據。
   - AI agent 永遠不主動執行 git 操作；需要 git 相關操作時，必須先由使用者明確要求。
   - 新增 pattern 前，優先沿用既有專案結構與慣例。
@@ -30,10 +32,13 @@ context: |
   - 自行撰寫 component 時，也必須遵循 MUI 的 style、theme 與互動慣例。
 
   Backend 規範：
-  - Backend 使用 NestJS、TypeScript。
-  - Backend API 都需要提供 property 說明。
-  - Backend API 都需要提供 controller 說明。
-  - 使用 NestJS module、provider、controller 和 service patterns，避免 ad hoc structure。
+  - Backend 使用 FastAPI、Python。
+  - 使用 Pydantic BaseModel 定義所有 request/response schema，並加上 Field 說明。
+  - 使用 FastAPI router 分層管理 endpoints（app/api/endpoints/）。
+  - 所有 endpoint 都需要設定 response_model、summary、description。
+  - 新增或修改 API 後，執行 export_openapi.py 更新 openspec/openapi.json。
+  - 使用 app/core/config.py 管理設定，透過 pydantic-settings 讀取 .env。
+  - 使用 app/services/ 放置商業邏輯，endpoint 僅負責 HTTP 層處理。
 
   相關 AI 文件：
   - ai/codex.md
@@ -57,7 +62,7 @@ rules:
     - 技術決策需以專業化、業界常用、可維護的方式為依據。
     - 若新增 dependencies，必須說明理由、替代方案與維護風險。
     - Frontend design 必須優先考量 MUI components 與 MUI theme。
-    - Backend design 必須維持 NestJS module、controller、service、provider 分層。
+    - Backend design 必須維持 FastAPI router、endpoint、service 分層（app/api/、app/services/、app/schemas/）。
   tasks:
     - 使用正體中文撰寫 tasks，專有名詞與技術名詞維持英文。
     - Tasks 必須依照 frontend、backend、shared 或 validation 分組。

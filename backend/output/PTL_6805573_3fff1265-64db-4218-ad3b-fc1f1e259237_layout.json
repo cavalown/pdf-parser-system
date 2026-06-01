@@ -1,0 +1,118 @@
+{
+  "canvas": {
+    "size": "Letter",
+    "width_pt": 612.0,
+    "height_pt": 792.0,
+    "tailwind_page_class": "w-[216mm] h-[279mm] p-[20mm] bg-white"
+  },
+  "pages": [
+    {
+      "page": 1,
+      "typography_tokens": {
+        "h1": "text-[12pt] font-bold text-slate-900",
+        "label": "text-[11pt] font-semibold text-slate-700",
+        "body": "text-[10pt] font-normal text-slate-600"
+      },
+      "blocks": []
+    },
+    {
+      "page": 2,
+      "typography_tokens": {
+        "h1": "text-[12pt] font-bold text-slate-900",
+        "label": "text-[11pt] font-semibold text-slate-700",
+        "body": "text-[10pt] font-normal text-slate-600"
+      },
+      "blocks": []
+    },
+    {
+      "page": 3,
+      "typography_tokens": {
+        "h1": "text-[12pt] font-bold text-slate-900",
+        "label": "text-[11pt] font-semibold text-slate-700",
+        "body": "text-[10pt] font-normal text-slate-600"
+      },
+      "blocks": []
+    },
+    {
+      "page": 4,
+      "typography_tokens": {
+        "h1": "text-[12pt] font-bold text-slate-900",
+        "label": "text-[11pt] font-semibold text-slate-700",
+        "body": "text-[10pt] font-normal text-slate-600"
+      },
+      "blocks": []
+    },
+    {
+      "page": 5,
+      "typography_tokens": {
+        "h1": "text-[12pt] font-bold text-slate-900",
+        "label": "text-[11pt] font-semibold text-slate-700",
+        "body": "text-[10pt] font-normal text-slate-600"
+      },
+      "blocks": []
+    },
+    {
+      "page": 6,
+      "typography_tokens": {
+        "h1": "text-[12pt] font-bold text-slate-900",
+        "label": "text-[11pt] font-semibold text-slate-700",
+        "body": "text-[10pt] font-normal text-slate-600"
+      },
+      "blocks": []
+    },
+    {
+      "page": 7,
+      "typography_tokens": {
+        "h1": "text-[12pt] font-bold text-slate-900",
+        "label": "text-[11pt] font-semibold text-slate-700",
+        "body": "text-[10pt] font-normal text-slate-600"
+      },
+      "blocks": []
+    },
+    {
+      "page": 8,
+      "typography_tokens": {
+        "h1": "text-[12pt] font-bold text-slate-900",
+        "label": "text-[11pt] font-semibold text-slate-700",
+        "body": "text-[10pt] font-normal text-slate-600"
+      },
+      "blocks": []
+    },
+    {
+      "page": 9,
+      "typography_tokens": {
+        "h1": "text-[12pt] font-bold text-slate-900",
+        "label": "text-[11pt] font-semibold text-slate-700",
+        "body": "text-[10pt] font-normal text-slate-600"
+      },
+      "blocks": []
+    },
+    {
+      "page": 10,
+      "typography_tokens": {
+        "h1": "text-[12pt] font-bold text-slate-900",
+        "label": "text-[11pt] font-semibold text-slate-700",
+        "body": "text-[10pt] font-normal text-slate-600"
+      },
+      "blocks": []
+    },
+    {
+      "page": 11,
+      "typography_tokens": {
+        "h1": "text-[12pt] font-bold text-slate-900",
+        "label": "text-[11pt] font-semibold text-slate-700",
+        "body": "text-[10pt] font-normal text-slate-600"
+      },
+      "blocks": []
+    },
+    {
+      "page": 12,
+      "typography_tokens": {
+        "h1": "text-[12pt] font-bold text-slate-900",
+        "label": "text-[11pt] font-semibold text-slate-700",
+        "body": "text-[10pt] font-normal text-slate-600"
+      },
+      "blocks": []
+    }
+  ]
+}
