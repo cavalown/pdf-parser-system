@@ -1,8 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.config import settings
-from app.routers import health, pdf
+from app.core.config import settings
+from app.api.router import router
 
 app = FastAPI(title=settings.app_name, debug=settings.debug)
 
@@ -13,5 +13,4 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(health.router, prefix="/api")
-app.include_router(pdf.router, prefix="/api/pdf")
+app.include_router(router, prefix="/api")
