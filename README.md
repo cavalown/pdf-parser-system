@@ -7,7 +7,7 @@ Parse PDF files and preview extracted content.
 ```txt
 pdf-parser-system/
   frontend/   React + Vite frontend
-  backend/    NestJS API server
+  backend/    Python FastAPI server
 ```
 
 ## Frontend
@@ -35,8 +35,10 @@ npm run build
 
 ```bash
 cd backend
-npm install
-npm run start:dev
+python -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+python main.py
 ```
 
 Default local URL:
@@ -51,9 +53,8 @@ Health check:
 http://localhost:3000/api/health
 ```
 
-Build check:
+API docs (Swagger UI):
 
-```bash
-cd backend
-npm run build
+```txt
+http://localhost:3000/docs
 ```
